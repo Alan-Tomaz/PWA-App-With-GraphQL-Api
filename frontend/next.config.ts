@@ -2,10 +2,8 @@ import type { NextConfig } from "next";
 const NODE_ENV = process.env.NODE_ENV || "development";
 
 const nextConfig: NextConfig = {
-  output: "export",
+  reactStrictMode: true,
 };
-
-export default nextConfig;
 
 const withPWA = require("next-pwa")({
   dest: "public",
@@ -14,6 +12,4 @@ const withPWA = require("next-pwa")({
   disable: NODE_ENV === "development",
 });
 
-module.exports = withPWA({
-  reactStrictMode: true,
-});
+export default withPWA(nextConfig);
