@@ -7,8 +7,6 @@ const isGithubPages = !!BASE_PATH;
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: "export",
-  basePath: isGithubPages ? `/${BASE_PATH}` : "",
-  assetPrefix: isGithubPages ? `/${BASE_PATH}` : "",
   images: {
     unoptimized: true,
   },
