@@ -13,6 +13,9 @@ const nextConfig: NextConfig = {
   output: "export",
   basePath: isGithubPages ? `/${repo}` : "",
   assetPrefix: isGithubPages ? `/${repo}` : "",
+  images: {
+    unoptimized: true,
+  },
 };
 
 const withPWA = require("next-pwa")({
