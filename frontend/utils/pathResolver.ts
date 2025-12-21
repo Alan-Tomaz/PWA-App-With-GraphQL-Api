@@ -1,5 +1,5 @@
-import { BASE_PATH } from "@/constants/CONSTANTS";
+export const BASE_PATH = "";
 
 export const pathResolver = (stringPath: string): string => {
-  return `${BASE_PATH}${stringPath}`;
+  return stringPath;
 };
