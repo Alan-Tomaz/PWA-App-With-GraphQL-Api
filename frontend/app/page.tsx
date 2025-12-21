@@ -1,4 +1,4 @@
-import { BASE_PATH } from "@/constants/CONSTANTS";
+import { pathResolver } from "@/utils/pathResolver";
 import Image from "next/image";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
-          src={`${BASE_PATH}/next.svg`}
+          src={pathResolver("/next.svg")}
           alt="Next.js logo"
           width={100}
           height={20}
@@ -44,7 +44,7 @@ export default function Home() {
           >
             <Image
               className="dark:invert"
-              src={`${BASE_PATH}/vercel.svg`}
+              src={pathResolver("/vercel.svg")}
               alt="Vercel logomark"
               width={16}
               height={16}
