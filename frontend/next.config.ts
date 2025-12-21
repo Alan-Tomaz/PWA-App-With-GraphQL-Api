@@ -1,18 +1,14 @@
 import type { NextConfig } from "next";
+import { BASE_PATH } from "./constants/CONSTANTS";
 const NODE_ENV = process.env.NODE_ENV || "development";
 
-export const basePath =
-  process.env.GITHUB_REPOSITORY?.split("/")[1] ||
-  process.env.NEXT_PUBLIC_REPO ||
-  "";
-
-const isGithubPages = !!basePath;
+const isGithubPages = !!BASE_PATH;
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: "export",
-  basePath: isGithubPages ? `/${basePath}` : "",
-  assetPrefix: isGithubPages ? `/${basePath}` : "",
+  basePath: isGithubPages ? `/${BASE_PATH}` : "",
+  assetPrefix: isGithubPages ? `/${BASE_PATH}` : "",
   images: {
     unoptimized: true,
   },
@@ -20,7 +16,7 @@ const nextConfig: NextConfig = {
 
 const withPWA = require("next-pwa")({
   dest: "public",
-  scope: basePath ? `/${basePath}/` : "/",
+  scope: BASE_PATH ? `/${BASE_PATH}/` : "/",
   disable: NODE_ENV === "development",
 });
 
