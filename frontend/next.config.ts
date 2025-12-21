@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 const NODE_ENV = process.env.NODE_ENV || "development";
 
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  output: "export",
+};
 
 export default nextConfig;
 
