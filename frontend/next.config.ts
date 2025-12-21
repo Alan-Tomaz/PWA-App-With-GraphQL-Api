@@ -17,8 +17,7 @@ const nextConfig: NextConfig = {
 
 const withPWA = require("next-pwa")({
   dest: "public",
-  register: true,
-  skipWaiting: true,
+  scope: repo ? `/${repo}/` : "/",
   disable: NODE_ENV === "development",
 });
 
