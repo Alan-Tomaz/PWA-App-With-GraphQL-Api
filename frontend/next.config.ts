@@ -14,7 +14,6 @@ const nextConfig: NextConfig = {
 
 const withPWA = require("next-pwa")({
   dest: "public",
-  scope: BASE_PATH ? `/${BASE_PATH}/` : "/",
   disable: NODE_ENV === "development",
 });
 
