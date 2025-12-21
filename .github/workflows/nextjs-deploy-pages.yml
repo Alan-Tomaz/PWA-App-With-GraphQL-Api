@@ -53,6 +53,7 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
+          cache-dependency-path: frontend/package-lock.json
       - name: Create env file
         run: |
           echo "NEXT_PUBLIC_REPO=${GITHUB_REPOSITORY##*/}" >> frontend/.env
