@@ -7,6 +7,8 @@ const isGithubPages = !!BASE_PATH;
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: "export",
+  basePath: isGithubPages ? `/${BASE_PATH}` : "",
+  assetPrefix: isGithubPages ? `/${BASE_PATH}` : "",
   images: {
     unoptimized: true,
   },
@@ -14,6 +16,7 @@ const nextConfig: NextConfig = {
 
 const withPWA = require("next-pwa")({
   dest: "public",
+  scope: BASE_PATH ? `/${BASE_PATH}/` : "/",
   disable: NODE_ENV === "development",
 });
 
