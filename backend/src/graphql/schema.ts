@@ -6,6 +6,6 @@ export async function createSchema() {
   return buildSchema({
     resolvers: [UserResolver],
     /* OPCIONAL */
-    emitSchemaFile: "src/schema.graphql",
+    emitSchemaFile: "src/graphql/schema.graphql",
   });
 }

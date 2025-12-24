@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import apiRouter from "./routes/index.js";
 import http from "http";
 import { Server } from "socket.io";
+import { prisma } from "./config/prismaClient.js";
 dotenv.config();
 
 const app = express();
@@ -32,11 +33,19 @@ io.on("connection", (socket) => {
     console.log("Cliente desconectado:", socket.id);
   });
 
-  socket.on("send-notification", (msg) => {
-    console.log("Mensagem recebida:", msg);
+  socket.on("send-notification", async (msg) => {
+    try {
+      // save in the database sqlite with prisma
+      const notification = await prisma.notification.create({
+        data: { message: msg },
+      });
 
-    // send to all clients except sender
-    io.emit("notification", msg);
+      // send  to all clients except sender
+      io.emit("notification", notification);
+    } catch (err) {
+      console.error("Erro Prisma:", err);
+    }
+    console.log("Mensagem recebida:", msg);
   });
 });
 

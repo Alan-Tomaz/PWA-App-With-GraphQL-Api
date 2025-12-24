@@ -15,7 +15,9 @@ function WebSocket() {
     });
 
     socket.on("notification", (msg) => {
-      alert(msg);
+      console.log(msg);
+      const message = msg.message;
+      alert(message);
     });
 
     return () => {
