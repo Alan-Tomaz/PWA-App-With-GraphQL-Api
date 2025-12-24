@@ -23,7 +23,7 @@ router.get("/", (req: Request, res: Response) => {
  *     summary: Lista de notificações
  *     responses:
  *       200:
- *       notificações: Array com as notificações
+ *         notificações: Array com as notificações
  */
 router.get("/notification", getNotifications);
 
