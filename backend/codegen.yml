@@ -1,6 +1,6 @@
-schema: ./src/schema.graphql
+schema: ./src/schema-first-graphql/schema.graphql
 generates:
-  ./src/generated/graphql.ts:
+  ./src/schema-first-graphql/generated/graphql.ts:
     plugins:
       - typescript
       - typescript-resolvers

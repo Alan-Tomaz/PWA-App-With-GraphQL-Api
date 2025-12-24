@@ -1,21 +1,20 @@
-/* CONFIG SERVER */
+import "reflect-metadata";
+import dotenv from "dotenv";
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
-import dotenv from "dotenv";
+import { createSchema } from "./schema.js";
 dotenv.config();
-/* IMPORT RESOLVERS */
-import { resolvers } from "./resolvers.js";
-/* IMPORT TYPEDEFS */
-import { readFileSync } from "fs";
-export const typeDefs = readFileSync("src/schema.graphql", "utf-8");
 
-/* START SERVER WITH RESOLVERS AND TYPEDEFS */
-const server = new ApolloServer({ typeDefs, resolvers });
+async function bootstrap() {
+  const schema = await createSchema();
 
-const GRAPHQL_PORT = Number(process.env.GRAPHQL_PORT) || 4000;
-/* LISTEN SERVER IN .ENV CONFIGURED PORT */
-const { url } = await startStandaloneServer(server, {
-  listen: { port: GRAPHQL_PORT },
-});
+  const server = new ApolloServer({ schema });
 
-console.log(`🚀 Server rodando em ${url}`);
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+  });
+
+  console.log(`🚀 Server running at ${url}`);
+}
+
+bootstrap();
