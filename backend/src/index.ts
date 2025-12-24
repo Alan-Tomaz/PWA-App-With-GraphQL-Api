@@ -1,20 +1,49 @@
-import "reflect-metadata";
+import express from "express";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger.js";
 import dotenv from "dotenv";
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-import { createSchema } from "./schema.js";
+import apiRouter from "./routes/index.js";
+import http from "http";
+import { Server } from "socket.io";
 dotenv.config();
 
-async function bootstrap() {
-  const schema = await createSchema();
+const app = express();
 
-  const server = new ApolloServer({ schema });
+// SERVER HTTP
+const server = http.createServer(app);
 
-  const { url } = await startStandaloneServer(server, {
-    listen: { port: 4000 },
+/* SWAGGER */
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+/* ROUTES */
+app.use("/api", apiRouter);
+
+/* GRAPHQL */
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  },
+});
+io.on("connection", (socket) => {
+  console.log("Cliente conectado:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("Cliente desconectado:", socket.id);
   });
 
-  console.log(`🚀 Server running at ${url}`);
-}
+  socket.on("send-notification", (msg) => {
+    console.log("Mensagem recebida:", msg);
 
-bootstrap();
+    // send to all clients except sender
+    io.emit("notification", msg);
+  });
+});
+
+/* START EXPRESS SERVER */
+const EXPRESS_PORT = process.env.EXPRESS_PORT || 3000;
+server.listen(EXPRESS_PORT, () => {
+  console.log(
+    "🚀 Server Express with Socket.IO started, access http://localhost:3000/api-docs to view the express API documentation."
+  );
+});

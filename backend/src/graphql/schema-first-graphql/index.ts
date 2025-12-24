@@ -8,7 +8,7 @@ import { resolvers } from "./resolvers.js";
 /* IMPORT TYPEDEFS */
 import { readFileSync } from "fs";
 export const typeDefs = readFileSync(
-  "src/schema-first-graphql/schema.graphql",
+  "src/graphql/schema-first-graphql/schema.graphql",
   "utf-8"
 );
 
@@ -21,4 +21,4 @@ const { url } = await startStandaloneServer(server, {
   listen: { port: GRAPHQL_PORT },
 });
 
-console.log(`🚀 Server rodando em ${url}`);
+console.log(`🚀 Server GraphQL rodando em ${url}`);

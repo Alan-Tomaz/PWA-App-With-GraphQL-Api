@@ -6,8 +6,10 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev:schema-first": "concurrently \"tsx watch src/schema-first-graphql/index.ts\" \"npx graphql-codegen --watch\"",
-    "dev": "tsx watch src/index.ts",
+    "dev:graphql-schema-first": "concurrently \"tsx watch src/graphql/schema-first-graphql/index.ts\" \"npx graphql-codegen --watch\"",
+    "dev:graphql": "tsx watch src/graphql/index.ts",
+    "dev:express": "tsx watch src/index.ts",
+    "dev": "concurrently \"tsx watch src/index.ts\" \"tsx watch src/graphql/index.ts\"",
     "codegen:watch": "graphql-codegen --watch",
     "codegen": "graphql-codegen",
     "start": "node dist/index.js",
@@ -22,7 +24,10 @@
     "@graphql-codegen/typescript-operations": "^5.0.7",
     "@graphql-codegen/typescript-resolvers": "^5.1.5",
     "@parcel/watcher": "^2.5.1",
+    "@types/express": "^5.0.6",
     "@types/node": "^25.0.3",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "concurrently": "^9.2.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
@@ -31,8 +36,14 @@
     "@apollo/server": "^5.2.0",
     "class-validator": "^0.14.3",
     "dotenv": "^17.2.3",
+    "express": "^5.2.1",
     "graphql": "^16.12.0",
+    "install": "^0.13.0",
+    "npm": "^11.7.0",
     "reflect-metadata": "^0.2.2",
+    "socket.io": "^4.8.3",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "type-graphql": "^2.0.0-rc.2"
   }
 }
